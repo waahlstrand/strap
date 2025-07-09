@@ -1,0 +1,16 @@
+# Core dependencies
+torch>=2.0.0
+torchvision>=0.15.0
+numpy>=1.21.0
+tensordict>=0.1.0
+
+# Rich for beautiful terminal output
+rich>=13.0.0
+
+# Optional dependencies
+wandb>=0.15.0  # For experiment tracking (optional)
+
+# For development
+pytest>=7.0.0
+black>=22.0.0
+isort>=5.0.0
