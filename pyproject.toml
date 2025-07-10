@@ -1,18 +1,61 @@
 [project]
 name = "strap"
 version = "0.1.0"
-description = "Add your description here"
+description = "STRAP: Separable tissue representations for attributable risk prediction"
 readme = "README.md"
 requires-python = ">=3.10"
+authors = [
+    {name = "Victor Wåhlstrand", email = "victor.wahlstrand@chalmers.se"},
+]
+license = {text = "MIT"}
+keywords = ["risk prediction", "representation learning", "interpretability", "attribution"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
 dependencies = [
-    "black>=22.0.0",
-    "isort>=5.0.0",
     "numpy>=1.21.0",
-    "pytest>=7.0.0",
     "rich>=13.0.0",
     "tensordict>=0.1.0",
     "timm>=1.0.16",
     "torch>=2.0.0",
     "torchvision>=0.15.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=22.0.0",
+    "isort>=5.0.0",
+    "pytest>=7.0.0",
+]
+logging = [
     "wandb>=0.15.0",
 ]
+all = [
+    "strap[dev,logging]",
+]
+
+[project.urls]
+Homepage = "https://github.com/waahlstrand/strap"
+Repository = "https://github.com/waahlstrand/strap"
+Documentation = "https://github.com/waahlstrand/strap#readme"
+Issues = "https://github.com/waahlstrand/strap/issues"
+
+[project.scripts]
+strap-train-cnn = "run_training:run_cnnstrap_training"
+strap-train-mae = "run_training:run_maestrap_training"
+strap-train-strap = "run_training:run_strap_training"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["models", "data.py", "train.py"]
