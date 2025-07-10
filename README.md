@@ -1,16 +1,63 @@
-# STRAP 🩻
+# 🩻 STRAP 
 
-This guide explains how to train the STRAP models using the provided training scripts.
+**STRAP** from the paper [*Separable tissue representations for attributable risk prediction*]() is a method for improved risk prediction and attribution of risk to pre-segmented regions-of-interet (ROIs), using a modified vision transformer architecture. The model is based on masked autoencoders, using only the patch tokens from each corresponding ROI as embeddings, drastically reducing the token sequence length.
+
+The paper was accepted at the [MICCAI 2025]() conference, and a prepring version is available on [arXiv]().
+
+## Installation
+
+### Quick Install from GitHub
+Either clone the repository, or preferably, fork it to modify it for your own project.
+
+#### Using uv (fastest and recommended)
+```bash
+# Install uv if you haven't already
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Install STRAP directly from GitHub
+uv pip install git+https://github.com/waahlstrand/strap.git
+
+# Or with optional dependencies
+uv pip install "git+https://github.com/waahlstrand/strap.git[logging,dev]"
+```
+
+**Why uv?** It is fast, and I recommend it.
+
+#### Using pip
+```bash
+pip install git+https://github.com/waahlstrand/strap.git
+
+# Or with optional dependencies
+pip install "git+https://github.com/waahlstrand/strap.git[logging,dev]"
+```
+
+### Development Installation
+
+#### Using uv
+```bash
+# Clone the repository
+git clone https://github.com/waahlstrand/strap.git
+cd strap
+
+# Create virtual environment and install
+uv venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+uv pip install -e ".[dev,logging]"
+```
+
+#### Using pip
+```bash
+# Clone the repository
+git clone https://github.com/waahlstrand/strap.git
+cd strap
+
+# Install in development mode
+pip install -e ".[dev,logging]"
+```
 
 ## Quick Start
 
-### 1. Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 2. Run Training
+### 1. Run Training
 
 #### Using the main training script
 ```bash
@@ -28,6 +75,14 @@ python train.py --model CNNSTRAP --epochs 50 --batch_size 16
 ## Training Configuration
 
 The training script supports various configuration options:
+
+### Command-Line Entry Points
+
+After installing the package, you have access to several command-line tools:
+
+- **`strap-train-strap`**: Quick STRAP training with optimized defaults
+- **`strap-train-mae`**: Quick MAESTRAP training with optimized defaults  
+- **`strap-train-cnn`**: Quick CNNSTRAP training with optimized defaults
 
 ### Model Parameters
 - `--model`: Model type (STRAP, MAESTRAP, CNNSTRAP)
